@@ -46,8 +46,10 @@ pre-installation_Checks() {
 }
 
 partition_disk(){
+    #https://superuser.com/questions/332252/how-to-create-and-format-a-partition-using-a-bash-script
+    #(echo n; echo p; echo 1; echo 1; echo 200; echo w) | fdisk /dev/sdc
     return 1
 }
 
-general_checks
+pre-installation_Checks
 update_system_clock
