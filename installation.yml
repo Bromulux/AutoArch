@@ -1,0 +1,17 @@
+---
+- name: Archlinux installation
+  hosts: workstations
+  handlers:
+    - import_tasks: handlers/handlers.yml
+  pre_tasks:
+    - import_tasks: pre_tasks/pre_installation_checks.yml
+  tasks:
+    - import_tasks: tasks/partition_disks.yml
+#    - import_tasks: tasks/test.yml
+#    - import_tasks: tests/test_dict.yml
+#important links:
+#https://docs.ansible.com/ansible/latest/collections/ansible/builtin/dict_lookup.html
+#https://stackoverflow.com/questions/57102717/how-to-gather-facts-about-disks-using-ansible
+#https://stackoverflow.com/questions/48036051/ansible-using-ansible-facts-how-can-i-get-a-disk-device-based-on-the-storage-c
+# filtering json: community.general.json_query: https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#transforming-dictionaries-into-lists
+#https://github.com/ansible/ansible/issues/41316

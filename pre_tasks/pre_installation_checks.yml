@@ -1,0 +1,8 @@
+---
+# tasks file for archauto
+- name: Pre-installation checks
+  script: ../files/scripts/pre_installation_checks.sh
+  register: result
+  failed_when: > 
+    (result["rc"] != 0)
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_error_handling.html

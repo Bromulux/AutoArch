@@ -27,7 +27,7 @@ check_internet_connection() {
 
 connect_wifi() {
     #todo
-    return 1
+    exit 1
 }
 
 update_system_clock() {
@@ -39,17 +39,16 @@ update_system_clock() {
     fi
 }
 
-pre-installation_Checks() {
+pre-installation_checks() {
     check_boot_mode
     check_internet_connection
-    return 0
 }
 
 partition_disk(){
     #https://superuser.com/questions/332252/how-to-create-and-format-a-partition-using-a-bash-script
     #(echo n; echo p; echo 1; echo 1; echo 200; echo w) | fdisk /dev/sdc
-    return 1
+    exit 1
 }
 
-pre-installation_Checks
+pre-installation_checks
 update_system_clock
