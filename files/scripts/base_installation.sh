@@ -48,10 +48,23 @@ update_system_clock() {
     fi
 }
 
-pre-installation_checks() {
+pre-installation_tasks() {
     check_boot_mode
     check_internet_connection
+    rank_mirrors
+    install_required_packages
 }
+
+install_required_packages(){
+    pacman -Sy > /dev/null
+    if ! pacman -Qi dosfstools > /dev/null; then
+        pacman -S dosfstools --noconfirm > /dev/null
+    fi
+    if ! pacman -Qi pacman-contrib > /dev/null; then
+        pacman -S pacman-contrib  --noconfirm  > /dev/null
+    fi  
+}
+
 
 show_disks_and_partitions() {
     print_info "Disks and partitions:"
@@ -64,8 +77,10 @@ show_disks_and_partitions() {
 partition_disk() {
     printf "Enter disk:"
     read -r disk_selected
-
-    create_gpt_partition_table "$disk_selected"
+ 
+    if ! is_gpt_parition_table_created "$disk_selected"; then
+        create_gpt_partition_table "$disk_selected"
+    fi
 
     printf "EFI partition size (Gb):"
     read -r efi_size
@@ -83,14 +98,16 @@ partition_disk() {
     create_partition "$disk_selected" "swap" "$swap_size"
     create_partition "$disk_selected" "root" "$root_size"
     create_partition "$disk_selected" "home" "$home_size"
+    
     sleep 10
+
     format_partition "$disk_selected" "efi"
     format_partition "$disk_selected" "swap"
     format_partition "$disk_selected" "root"
     format_partition "$disk_selected" "home"
 
-    #sleep 30
-    #blockdev --rereadpt /dev/sda
+    sleep 10
+    blockdev --rereadpt "$disk_selected"
     
     mount_partition "$disk_selected" "root"
     #impotant to create the mount points AFTER mounting the root partition
@@ -98,31 +115,6 @@ partition_disk() {
     mount_partition "$disk_selected" "efi"
     mount_partition "$disk_selected" "swap"
     mount_partition "$disk_selected" "home"
-
-    #printf "Enter Root partition disk:"
-    #read -r root_location
-    #printf "Root partition size (Gb):"
-    #read -r root_size
-
-    #printf "Enter Swap partition disk:"
-    #read -r swap_location
-    #printf "Swap partition size (Gb):"
-    #read -r swap_size
-
-    #printf "Enter EFI partition disk:"
-    #read -r efi_location
-    #printf "EFI partition size (Gb):"
-    #read -r efi_size
-    #
-    #printf "Enter Home partition disk:"
-    #read -r home_location
-    #printf "Home partition size (Gb):"
-    #read -r home_size
-
-    #format_partition "$efi_location" "efi"
-    #format_partition "$swap_location" "swap"
-    #format_partition "$root_location" "root"
-    #format_partition "$home_location" "home"
 }
 
 create_mount_points(){
@@ -137,19 +129,6 @@ create_mount_points(){
 
 #disk type size
 create_partition() {
-    #if is_gpt_parition_table_created "$1";then
-    #if [ "$1" = "efi" ]; then
-    #    if is_efi_parition_created "$1"; then
-    #        print_warning "There's already an EFI partition on that disk. Are you planing to dual boot? (y/n):"
-    #        read -r answer
-    #        if [ "$answer" = "n" ]; then
-    #            printf "exiting.."
-    #            exit 1
-    #        else
-    #            print_info "skipping creation of EFI partition"
-    #        fi
-    #    fi
-    #else
     # (K,M,G,T,P) ?
     {
         printf "n\n\n\n+%sG\n" "$3"
@@ -159,17 +138,6 @@ create_partition() {
     sleep 5
     change_last_created_partition_type "$1" "$2"
     print_info "$2 partition created"
-    #fi
-    #else
-    #    print_warning "No GPT partition table was detected on $1. Would you like to wipe $1 and create the table? (y/n)"
-    #    read -r answer
-    #    if [ "$answer" = "n" ]; then
-    #        printf "exiting.."
-    #        exit 1
-    #    fi
-    #    create_gpt_partition_table "$1" 2> /dev/null
-    #    create_partition "$1" "$2" "$3"
-    #fi
 }
 
 # when the disk has never been used or you want to clean it.
@@ -236,7 +204,7 @@ format_partition() {
         ;;
     "swap")
         partition_location=$(printf "p\n" | fdisk "$1" | grep -i "$2" | grep -o -E "^\/dev\/[a-z]+[1-9]")
-        mkswap -F "$partition_location" &> /dev/null
+        mkswap "$partition_location" &> /dev/null
         printf "[Info] Swap file system created on $2 partition %s\n" "$partition_location"
         ;;
     "root")
@@ -282,9 +250,41 @@ mount_partition(){
     esac
 }
 
-pre-installation_checks
+rank_mirrors(){
+    #backup mirror list
+    cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+    curl -s "https://www.archlinux.org/mirrorlist/?country=CA&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
+}
+
+install_essential_packages(){
+    pacstrap /mnt base base-devel linux linux-firmware  man-db man-pages texinfo nano networkmanager git > /dev/null
+}
+
+generate_fstab(){
+    genfstab -U /mnt >> /mnt/etc/fstab
+    print_info "Showing fstab"
+    cat /mnt/etc/fstab
+}
+
+change_root(){
+    arch-chroot /mnt
+}
+##############################################################################################################################################################################################
+set_time_zone(){
+    ln -sf /usr/share/zoneinfo/Toronto /etc/localtime
+    # sleep required?
+    hwclock --systohc
+}
+
 update_system_clock
+pre-installation_tasks
 clear
 show_disks_and_partitions
 partition_disk
 show_disks_and_partitions
+install_essential_packages
+generate_fstab
+
+change_root
+
+set_time_zone
