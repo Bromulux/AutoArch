@@ -1,0 +1,13 @@
+---
+- name: Create local working directory
+  file:
+    path: /tmp/archauto
+    state: directory
+    mode: '0755'
+
+- name: Executing pre installation tasks
+  script: ../files/scripts/prepare.sh
+  register: result
+  failed_when: > 
+    (result["rc"] != 0)
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_error_handling.html

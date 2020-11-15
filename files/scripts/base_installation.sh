@@ -1,3 +1,4 @@
+#!/bin/bash
 set_time_zone(){
     print_info "Setting time zone"
     ln -sf /usr/share/zoneinfo/Toronto /etc/localtime

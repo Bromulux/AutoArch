@@ -4,9 +4,10 @@
   handlers:
     - import_tasks: handlers/handlers.yml
   pre_tasks:
-    - import_tasks: pre_tasks/pre_installation_checks.yml
+    - import_tasks: pre_tasks/prepare.yml
+    - import_tasks: pre_tasks/recon.yml
   tasks:
-    - import_tasks: tasks/partition_disks.yml
+#    - import_tasks: tasks/partition_disks.yml
 #    - import_tasks: tasks/test.yml
 #    - import_tasks: tests/test_dict.yml
 #important links:

@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #functions:
 print_error() {
     #https://stackoverflow.com/questions/2990414/echo-that-outputs-to-stderr
@@ -13,115 +12,36 @@ print_info() {
 print_warning() {
     printf "[WARNING] %s:" "$1"
 }
-
-check_boot_mode() {
-    if [ -d "/sys/firmware/efi/efivars" ]; then
-        print_info "Boot Mode [OK]"
-        return 0
-    else
-        print_error "Boot mode is not UEFI."
-        exit 1
-    fi
-}
-
-check_internet_connection() {
-    if ping "archlinux.org" -c 3 >/dev/null; then
-        print_info "Internet Connection [OK]"
-    else
-        print_error "Not connected to the internet"
-        exit 1
-    fi
-}
-
-connect_wifi() {
-    #todo
-    #https://wiki.archlinux.org/index.php/Iwd#iwctl
-    exit 1
-}
-
-update_system_clock() {
-    timedatectl set-ntp true
-    if timedatectl status | awk '/System clock synchronized: yes/ && /NTP service: active/'; then
-        print_info "System clock update [OK]"
-    else
-        print_error "System clock not updated"
-    fi
-}
-
-pre-installation_tasks() {
-    check_boot_mode
-    check_internet_connection
-    update_system_clock
-    install_required_packages
-    rank_mirrors
-}
-
-rank_mirrors(){
-    #backup mirror list
-    cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-    curl -s "https://www.archlinux.org/mirrorlist/?country=CA&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
-}
-
-install_required_packages(){
-    pacman -Sy > /dev/null
-    if ! pacman -Qi dosfstools &> /dev/null; then
-        pacman -S dosfstools --noconfirm > /dev/null
-    fi
-    if ! pacman -Qi pacman-contrib &> /dev/null; then
-        pacman -S pacman-contrib  --noconfirm  > /dev/null
-    fi  
-}
-
-
-show_disks_and_partitions() {
-    print_info "Disks and partitions:"
-    printf "\n"
-    lsblk -f
-    printf "\n"
-    fdisk -l
-}
-
+# disk
 partition_disk() {
-    printf "Enter disk:"
-    read -r disk_selected
- 
-    if ! is_gpt_parition_table_created "$disk_selected"; then
-        create_gpt_partition_table "$disk_selected"
+    if ! is_gpt_parition_table_created "$1"; then
+        create_gpt_partition_table "$1"
     fi
 
-    printf "EFI partition size (Gb):"
-    read -r efi_size
-
-    printf "Swap partition size (Gb):"
-    read -r swap_size
-
-    printf "Root partition size (Gb):"
-    read -r root_size
-
-    printf "Home partition size (Gb):"
-    read -r home_size
-
-    create_partition "$disk_selected" "efi" "$efi_size"
-    create_partition "$disk_selected" "swap" "$swap_size"
-    create_partition "$disk_selected" "root" "$root_size"
-    create_partition "$disk_selected" "home" "$home_size"
+    if ! is_efi_parition_created disk_selected ; then
+        create_partition "$1" "efi" "$efi_size"
+        #wait?
+        format_partition "$1" "efi"
+    fi
+    create_partition "$1" "swap" "$swap_size"
+    create_partition "$1" "root" "$root_size"
+    create_partition "$1" "home" "$home_size"
     
     sleep 10
 
-    format_partition "$disk_selected" "efi"
-    format_partition "$disk_selected" "swap"
-    format_partition "$disk_selected" "root"
-    format_partition "$disk_selected" "home"
+    format_partition "$1" "swap"
+    format_partition "$1" "root"
+    format_partition "$1" "home"
 
     sleep 10
-    blockdev --rereadpt "$disk_selected"
+    blockdev --rereadpt "$1"
     
-    mount_partition "$disk_selected" "root"
-    #impotant to create the mount points AFTER mounting the root partition
+    mount_partition "$1" "root"
+    #important to create the mount points AFTER mounting the root partition
     create_mount_points
-    mount_partition "$disk_selected" "efi"
-    mount_partition "$disk_selected" "swap"
-    mount_partition "$disk_selected" "home"
+    mount_partition "$1" "efi"
+    mount_partition "$1" "swap"
+    mount_partition "$1" "home"
 }
 
 create_mount_points(){
@@ -278,7 +198,7 @@ change_root(){
 
 pre-installation_tasks
 show_disks_and_partitions
-partition_disk
+partition_disk "/dev/sda"
 show_disks_and_partitions
 install_essential_packages
 generate_fstab
