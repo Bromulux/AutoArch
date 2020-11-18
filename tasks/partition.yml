@@ -1,0 +1,31 @@
+---
+- name: test
+  community.general.parted:
+    device: "{{ disk }}"
+    number: 1
+    state: present
+    flags: [esp]
+    label: gpt
+    part_end: "{{ partition_size['efi'] }}"
+    fs_type: fat32
+  register: efi_partition_creation # could be good for reuse later?
+
+- name: test2
+  community.general.filesystem:
+    fstype: vfat
+    dev: /dev/sda1
+
+- name: print disk info
+  debug:
+    msg: "{{ efi_partition_creation }}"
+#- name: output disk and partition info
+#  debug:
+#    msg: "{{ item.value.partitions }}"
+#  with_dict: "{{ hostvars[inventory_hostname].ansible_devices }}"
+#  debug:
+#    msg: "{{ hostvars[inventory_hostname].ansible_devices | community.general.json_query()  }}"
+#msg: "{{ hostvars[inventory_hostname] | to_json }}"
+#var: item
+#loop: "{{ hostvars[inventory_hostname] | community.general.json_query('ansible_devices[*].partitions') }}"
+
+
