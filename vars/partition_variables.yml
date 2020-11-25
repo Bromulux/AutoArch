@@ -4,7 +4,7 @@
 disk: /dev/sda
 # B, KiB, MiB, GiB, TiB
 partition_size:
-  efi: 1GiB
-  swap: 1GB
-  root: 30GB
-  home: 30GB
+  efi: 512
+  swap: 2
+  root: 30
+  home: 30

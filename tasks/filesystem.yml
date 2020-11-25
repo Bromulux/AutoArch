@@ -1,0 +1,13 @@
+---
+- name: Create partitions file system
+  block:
+    - name: Create FAT32 fstype
+      community.general.filesystem:
+        dev: /dev/sda1
+        fstype: vfat
+        opts: -F32
+        
+    - name: Create swap fstype
+      community.general.filesystem:
+        dev: /dev/sda2
+        fstype: swap

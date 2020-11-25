@@ -1,31 +1,92 @@
 ---
-- name: test
+  
+- name: Read device information (always use unit when probing)
+  community.general.parted: device="{{ disk }}" unit=MiB
+  register: sda_info
+
+- name: Remove all partitions from disk
   community.general.parted:
+    device: "{{ disk }}"
+    number: '{{ item.num }}'
+    state: absent
+  loop: '{{ sda_info.partitions }}'
+
+- name: Create EFI partition
+  community.general.parted:
+    unit: "MiB" # only for display, not for part_start/part_end
     device: "{{ disk }}"
     number: 1
     state: present
     flags: [esp]
     label: gpt
-    part_end: "{{ partition_size['efi'] }}"
+    part_type: primary
+    part_start: 1MiB
+    part_end: "" "{{{{ 39.779 | round(2,'ceil')}}}}" #"{{ partition_size['efi'] }}" https://www.mydailytutorials.com/ansible-arithmetic-operations/ **************
     fs_type: fat32
   register: efi_partition_creation # could be good for reuse later?
 
-- name: test2
-  community.general.filesystem:
-    fstype: vfat
-    dev: /dev/sda1
+#- name: Create swap partition
+#  community.general.parted:
+#    device: "{{ disk }}"
+#    number: 2
+#    state: present
+#    label: gpt
+#    part_type: primary
+#    part_start: "{{ partition_size['efi'] }}"
+#    part_end: "{{ partition_size['swap'] }}"
+#    fs_type: linux-swap
+#  register: swap_partition_creation # could be good for reuse later?
+
+#- name: Create Root partition
+#  community.general.parted:
+#    device: "{{ disk }}"
+#    number: 3
+#    state: present
+#    label: gpt
+#    part_type: primary
+#    part_end: "{{ partition_size['root'] }}"
+#    fs_type: ext4
+#  register: root_partition_creation # could be good for reuse later?
+
+#- name: Create Home partition
+#  community.general.parted:
+#    device: "{{ disk }}"
+#    number: 4
+#    state: present
+#    label: gpt
+#    part_type: primary
+#    part_end: 2GiB
+#    fs_type: ext4
+#  register:  home_partition_creation
+#- name: Setup filesystems for bare install
+#  block:
+#    - name: Create FAT32 fstype for EFI partition
+#      filesystem:
+#        dev: "{{ bootstrap_bootpart }}"
+#        fstype: vfat
+#        opts: -F32
+#
+#    - name: Create btrfs fstype for root partition
+#      filesystem:
+#        dev: "{{ bootstrap_cryptpart }}"
+#        fstype: btrfs
+#
+#    - name: Mount root partition
+#      mount:
+#        path: /mnt
+#        src: "{{ bootstrap_cryptpart }}"
+#        fstype: btrfs
+#        state: mounted
+#
+#    - name: Mount boot partition
+#      mount:
+#        path: /mnt/boot
+#        src: "{{ bootstrap_bootpart }}"
+#        fstype: vfat
+#        state: mounted
 
 - name: print disk info
   debug:
     msg: "{{ efi_partition_creation }}"
-#- name: output disk and partition info
-#  debug:
-#    msg: "{{ item.value.partitions }}"
-#  with_dict: "{{ hostvars[inventory_hostname].ansible_devices }}"
-#  debug:
-#    msg: "{{ hostvars[inventory_hostname].ansible_devices | community.general.json_query()  }}"
-#msg: "{{ hostvars[inventory_hostname] | to_json }}"
-#var: item
-#loop: "{{ hostvars[inventory_hostname] | community.general.json_query('ansible_devices[*].partitions') }}"
 
 
