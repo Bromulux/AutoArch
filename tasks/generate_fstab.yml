@@ -1,0 +1,5 @@
+---
+- name: Generate /etc/fstab
+  shell:
+    cmd: genfstab -U /mnt >> /mnt/etc/fstab
+                  

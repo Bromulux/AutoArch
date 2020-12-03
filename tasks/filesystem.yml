@@ -3,11 +3,46 @@
   block:
     - name: Create FAT32 fstype
       community.general.filesystem:
-        dev: /dev/sda1
+        dev: "{{disk}}1"
         fstype: vfat
         opts: -F32
         
     - name: Create swap fstype
       community.general.filesystem:
-        dev: /dev/sda2
+        dev: "{{disk}}2"
         fstype: swap
+
+    - name: Create Root fstype
+      community.general.filesystem:
+        dev: "{{disk}}3"
+        fstype: ext4
+
+    - name: Create Home fstype
+      community.general.filesystem:
+        dev: "{{disk}}4"
+        fstype: ext4
+
+#boot, swap, root, home
+    - name: Mount root partition
+      mount:
+        path: /mnt
+        src: "{{ disk }}3"
+        fstype: ext4
+        state: mounted
+
+    - name: Mount home partition
+      mount:
+        path: /mnt/home
+        src: "{{ disk }}4"
+        fstype: ext4
+        state: mounted
+
+    - name: Mount boot partition
+      mount:
+        path: /mnt/boot
+        src: "{{ disk }}1"
+        fstype: vfat
+        state: mounted
+
+    - name: Mount swap partition
+      command: swapon "{{ disk }}2"

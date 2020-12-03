@@ -1,0 +1,6 @@
+---
+---
+- name: Invoke pacstrap to initialize arch
+  command:
+    cmd: "/usr/bin/pacstrap /mnt {{ bootstrap_pacman_pkgs | join(' ') }}"
+    creates: /mnt/bin/bash

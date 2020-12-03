@@ -2,9 +2,9 @@
 # vars file for archauto
 #password: magic
 disk: /dev/sda
-# B, KiB, MiB, GiB, TiB
+# EFI in MiB rest in GiB
 partition_size:
-  efi: 512
+  boot: 260
   swap: 2
   root: 30
   home: 30

@@ -1,0 +1,10 @@
+---
+- name: Installing required package for mirror ranking
+  community.general.pacman:
+    name: pacman-contrib
+
+- name: Backup mirrorlist
+  command: cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+  
+- name: Sorting mirrorlist
+  shell: curl -s "https://www.archlinux.org/mirrorlist/?country=CA&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist

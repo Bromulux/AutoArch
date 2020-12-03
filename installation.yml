@@ -4,13 +4,16 @@
   vars_files:
     - vars/partition_variables.yml
   handlers:
-    - import_tasks: handlers/handlers.yml
+ #   - import_tasks: handlers/handlers.yml
   pre_tasks:
-#    - import_tasks: pre_tasks/base_installation.yml
+    - import_tasks: tasks/update_sys_clock.yml
+    - import_tasks: pre_tasks/pre_installation.yml
   tasks:
     - import_tasks: tasks/partition.yml
-#    - import_tasks: tasks/test.yml
-#    - import_tasks: tests/test_dict.yml
+    - import_tasks: tasks/filesystem.yml
+    - import_tasks: tasks/sorting_mirror_list.yml
+    - import_tasks: tasks/pacstrap.yml
+    - import_tasks: tasks/generate_fstab.yml
 #important links:
 #https://docs.ansible.com/ansible/latest/collections/ansible/builtin/dict_lookup.html
 #https://stackoverflow.com/questions/57102717/how-to-gather-facts-about-disks-using-ansible
