@@ -1,22 +1,35 @@
 ---
-- name: Archlinux installation
+- name: Archlinux bootstrap
   hosts: workstations
   vars_files:
-    - vars/partition_variables.yml
-  handlers:
+    - vars/partitions_vars.yml
+    - vars/packages_vars.yml
+ # handlers:
  #   - import_tasks: handlers/handlers.yml
+ # pre_tasks:
+ #   - import_tasks: pre_tasks/update_sys_clock.yml
+ #   - import_tasks: pre_tasks/update_pacman_db.yml
+ # tasks:
+ #   - import_tasks: tasks/bootstrap/partition.yml
+ #   - import_tasks: tasks/bootstrap/filesystem.yml
+ #   - import_tasks: tasks/bootstrap/sorting_mirror_list.yml
+ #   - import_tasks: tasks/bootstrap/pacstrap.yml
+ #   - import_tasks: tasks/bootstrap/generate_fstab.yml
+- name: Archlinux chroot
+  hosts: workstations
+  become: yes
+  vars_files:
+    - vars/user_vars.yml
   pre_tasks:
-    - import_tasks: tasks/update_sys_clock.yml
-    - import_tasks: pre_tasks/pre_installation.yml
+    #- import_tasks: tasks/chroot/test.yml
   tasks:
-    - import_tasks: tasks/partition.yml
-    - import_tasks: tasks/filesystem.yml
-    - import_tasks: tasks/sorting_mirror_list.yml
-    - import_tasks: tasks/pacstrap.yml
-    - import_tasks: tasks/generate_fstab.yml
+    - import_tasks: tasks/chroot/test.yml
 #important links:
 #https://docs.ansible.com/ansible/latest/collections/ansible/builtin/dict_lookup.html
 #https://stackoverflow.com/questions/57102717/how-to-gather-facts-about-disks-using-ansible
 #https://stackoverflow.com/questions/48036051/ansible-using-ansible-facts-how-can-i-get-a-disk-device-based-on-the-storage-c
 # filtering json: community.general.json_query: https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#transforming-dictionaries-into-lists
+# filtering json: https://jmespath.org/tutorial.html#functions
 #https://github.com/ansible/ansible/issues/41316
+# chroot: https://coderwall.com/p/_lpf1g/run-a-playbook-chrooted-in-a-local-dir
+# chroot: https://docs.ansible.com/ansible/latest/collections/community/general/chroot_connection.html

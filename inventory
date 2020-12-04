@@ -1,2 +1,4 @@
 [workstations]
 192.168.2.133
+[chroot]
+/mnt ansible_chroot_exe=arch-chroot

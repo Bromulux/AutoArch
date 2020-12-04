@@ -17,7 +17,6 @@
 #- debug: msg="{{ ret_stat_disk }}"
 #- debug: msg="{{ hostvars[inventory_hostname].ansible_devices }}"
 
-
-- name: Update packages database
+- name: Update pacman packages database
   community.general.pacman:
     update_cache: yes
