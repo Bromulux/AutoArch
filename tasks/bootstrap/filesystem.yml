@@ -1,7 +1,7 @@
 ---
 - name: Create partitions file system
   block:
-    - name: Create FAT32 fstype
+    - name: Create boot fstype
       community.general.filesystem:
         dev: "{{disk}}1"
         fstype: vfat
@@ -12,12 +12,12 @@
         dev: "{{disk}}2"
         fstype: swap
 
-    - name: Create Root fstype
+    - name: Create root fstype
       community.general.filesystem:
         dev: "{{disk}}3"
         fstype: ext4
 
-    - name: Create Home fstype
+    - name: Create home fstype
       community.general.filesystem:
         dev: "{{disk}}4"
         fstype: ext4

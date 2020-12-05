@@ -1,6 +1,6 @@
 ---
 - name: Archlinux bootstrap
-  hosts: workstations
+  hosts: workstation
   vars_files:
     - vars/partitions_vars.yml
     - vars/packages_vars.yml
@@ -20,10 +20,8 @@
   connection: chroot
   vars_files:
     - vars/user_vars.yml
-  pre_tasks:
-    #- import_tasks: tasks/chroot/test.yml
   tasks:
-    - import_tasks: tasks/chroot/test.yml
+    - import_tasks: tasks/chroot/time_zone.yml
 #important links:
 #https://docs.ansible.com/ansible/latest/collections/ansible/builtin/dict_lookup.html
 #https://stackoverflow.com/questions/57102717/how-to-gather-facts-about-disks-using-ansible

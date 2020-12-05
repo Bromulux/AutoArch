@@ -1,15 +1,26 @@
 ---
-  
-- name: Read device information (always use unit when probing)
-  community.general.parted: device="{{ disk }}" unit=MiB
-  register: sda_info
+#  TODO: make another play to clean disk 
+#- name: Read device information (always use unit when probing)
+#  community.general.parted: device="{{ disk }}" unit=MiB
+#  register: sda_info
+#
+#
+#- name: Unmount partitions
+#  ansible.posix.mount:
+#    path: "{{ disk }}{{ item.num }}"
+#    state: unmounted
+#  loop: '{{ sda_info.partitions }}'
+#
+#- name: delete partitions
+#  community.general.parted:
+#    device: "{{ disk }}"
+#    number: '{{ item.num }}'
+#    state: absent
+#  loop: '{{ sda_info.partitions }}'
 
-- name: Remove all partitions from disk
-  community.general.parted:
-    device: "{{ disk }}"
-    number: '{{ item.num }}'
-    state: absent
-  loop: '{{ sda_info.partitions }}'
+#- name: Clean disk
+#  shell: dd if=/dev/zero of={{ disk }} bs=1M
+#  ignore_errors: yes
 
 - name: Create Boot partition
   community.general.parted:
@@ -63,8 +74,4 @@
     part_end: "{{ parition_created | community.general.json_query('partitions[-1].end') + partition_size['home'] * 1024 }}MiB"
     fs_type: ext4
   register: parition_created
-
-- name: print disk info
-  debug:
-    msg: "{{ parition_created }}"
 

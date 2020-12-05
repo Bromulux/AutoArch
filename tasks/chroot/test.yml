@@ -1,5 +1,0 @@
----
-- name: create dir new chroot
-  file:
-    path: /testChroot
-    state: directory
