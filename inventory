@@ -1,4 +1,4 @@
 [workstations]
-192.168.2.133
+localhost ansible_connection=local
 [chroot]
 /mnt ansible_chroot_exe=arch-chroot

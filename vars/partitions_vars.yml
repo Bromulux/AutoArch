@@ -6,5 +6,5 @@ disk: /dev/sda
 partition_size:
   boot: 260
   swap: 2
-  root: 30
-  home: 30
+  root: 20
+  home: 1

@@ -4,20 +4,20 @@
   vars_files:
     - vars/partitions_vars.yml
     - vars/packages_vars.yml
- # handlers:
- #   - import_tasks: handlers/handlers.yml
- # pre_tasks:
- #   - import_tasks: pre_tasks/update_sys_clock.yml
- #   - import_tasks: pre_tasks/update_pacman_db.yml
- # tasks:
- #   - import_tasks: tasks/bootstrap/partition.yml
- #   - import_tasks: tasks/bootstrap/filesystem.yml
- #   - import_tasks: tasks/bootstrap/sorting_mirror_list.yml
- #   - import_tasks: tasks/bootstrap/pacstrap.yml
- #   - import_tasks: tasks/bootstrap/generate_fstab.yml
+  handlers:
+    - import_tasks: handlers/handlers.yml
+  pre_tasks:
+    - import_tasks: pre_tasks/update_sys_clock.yml
+    - import_tasks: pre_tasks/update_pacman_db.yml
+  tasks:
+    - import_tasks: tasks/bootstrap/partition.yml
+    - import_tasks: tasks/bootstrap/filesystem.yml
+    - import_tasks: tasks/bootstrap/sorting_mirror_list.yml
+    - import_tasks: tasks/bootstrap/pacstrap.yml
+    - import_tasks: tasks/bootstrap/generate_fstab.yml
 - name: Archlinux chroot
-  hosts: workstations
-  become: yes
+  hosts: chroot
+  connection: chroot
   vars_files:
     - vars/user_vars.yml
   pre_tasks:

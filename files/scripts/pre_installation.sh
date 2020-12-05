@@ -3,10 +3,15 @@ enlarge_live_root_partition(){
     mount -o remount,size=5G /run/archiso/cowspace
 }
 
-install_required_packages(){
-    pacman -Syu git ansible --noconfirm
+install_ansible(){
+    pacman -Sy python python-pip ansible --noconfirm
+    ansible-galaxy collection install community.general
+    pip install jmespath #install -r requirements.txt
 }
 
-clone_auto_arch_repo(){
-
+main(){
+    enlarge_live_root_partition
+    install_ansible
 }
+
+main

@@ -1,7 +1,4 @@
 ---
-- name: Execute Chroot
-  command: arch-chroot /mnt
-  
 - name: create dir new chroot
   file:
     path: /testChroot

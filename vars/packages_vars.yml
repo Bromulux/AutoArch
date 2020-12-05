@@ -4,25 +4,27 @@ bootstrap_pacman_pkgs:
   - base-devel
   - linux
   - linux-firmware
-  #- git
-  #- curl
-  #- man
-  #- man-db
-  #- man-pages
-  #- texinfo
-  #- zsh
-  #- vim
-  #- nano
-  #- code
-  #- networkmanager
-  #- nm-connection-editor
-  #- network-manager-applet
-  #- yay
-  #- arandr
-  #- thunderbird
-  #- terminator
-  #- rofi
-  #- htop
-  #- nnn
-  #- vlc
+  - git
+  - python
+  - python-pip
+  - wget
+  - man
+  - man-db
+  - man-pages
+  - texinfo
+  - zsh
+  - vim
+  - nano
+  - code
+  - networkmanager
+  - nm-connection-editor
+  - network-manager-applet
+#  - yay
+  - arandr
+  - thunderbird
+  - terminator
+  - rofi
+  - htop
+  - nnn
+  - vlc
 
