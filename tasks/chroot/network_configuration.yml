@@ -1,0 +1,21 @@
+---
+- name: Add hostname
+  lineinfile:
+    path: /etc/hostname
+    line: "{{ hostname }}"
+    create: true
+
+- name: Add hosts entries
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ item }}"
+  loop:
+    - 127.0.0.1 localhost
+    - ::1 localhost
+
+- name: Start Network manager service
+  service:
+    name: NetworkManager.service
+    state: stopped
+    enabled: yes
+

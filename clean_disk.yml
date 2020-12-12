@@ -1,0 +1,9 @@
+---
+- name: Clean disk
+  hosts: workstation
+  vars_files:
+    - vars/partitions_vars.yml
+  tasks:
+    - name: Clean {{ disk }}
+      shell: dd if=/dev/zero of={{ disk }} bs=1M
+      ignore_errors: yes

@@ -1,0 +1,21 @@
+---
+- name: Configure system languages
+  replace:
+    path: /etc/locale.gen
+    regexp: "{{ lang.regexp }}"
+    replace: "{{ lang.replace }}"
+  loop:
+    - { regexp: "#fr_CA.UTF8 UTF-8", replace: "fr_CA.UTF8 UTF-8" }
+    - { regexp: "#en_CA.UTF8 UTF-8", replace: "en_CA.UTF8 UTF-8" }
+  loop_control:
+    loop_var: lang
+  
+- name: Run locale-gen
+  command:
+    cmd: locale-gen
+
+- name: Configure system languages
+  lineinfile:
+    path: /etc/locale.conf
+    line: "LANG=en_CA.UTF8"
+    create: true

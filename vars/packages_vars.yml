@@ -4,6 +4,9 @@ bootstrap_pacman_pkgs:
   - base-devel
   - linux
   - linux-firmware
+  - grub
+  - efibootmgr
+  - intel-ucode # or amd-ucode
   - git
   - python
   - python-pip
@@ -27,4 +30,6 @@ bootstrap_pacman_pkgs:
   - htop
   - nnn
   - vlc
+  - sudo
+  - openssh
 

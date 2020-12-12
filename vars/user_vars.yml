@@ -1,2 +1,6 @@
 ---
 timezone: Canada/Eastern
+hostname: AutoArch
+user: bromulux
+user_groups:
+ - wheel

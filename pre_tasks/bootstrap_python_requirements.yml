@@ -1,0 +1,6 @@
+---
+- name: Install bootstrap required python packages
+  pip:
+    name: "{{ item }}"
+  loop:
+    - jmespath

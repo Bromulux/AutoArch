@@ -1,27 +1,4 @@
 ---
-#  TODO: make another play to clean disk 
-#- name: Read device information (always use unit when probing)
-#  community.general.parted: device="{{ disk }}" unit=MiB
-#  register: sda_info
-#
-#
-#- name: Unmount partitions
-#  ansible.posix.mount:
-#    path: "{{ disk }}{{ item.num }}"
-#    state: unmounted
-#  loop: '{{ sda_info.partitions }}'
-#
-#- name: delete partitions
-#  community.general.parted:
-#    device: "{{ disk }}"
-#    number: '{{ item.num }}'
-#    state: absent
-#  loop: '{{ sda_info.partitions }}'
-
-#- name: Clean disk
-#  shell: dd if=/dev/zero of={{ disk }} bs=1M
-#  ignore_errors: yes
-
 - name: Create Boot partition
   community.general.parted:
     unit: "MiB" # only for display, not for part_start/part_end

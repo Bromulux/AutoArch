@@ -1,0 +1,5 @@
+---
+- name: Full system upgrade
+  pacman:
+      upgrade: true # not required. Whether or not to upgrade whole system.
+      update_cache: true # not required. Whether or not to refresh the master package lists. This can be run as part of a package installation or as a separate step.

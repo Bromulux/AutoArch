@@ -1,0 +1,6 @@
+---
+- name: Configure Sudo
+  replace:
+    path: /etc/sudoers
+    regexp: "^# %wheel ALL=\\(ALL\\) ALL"
+    replace: "%wheel ALL=(ALL) ALL"

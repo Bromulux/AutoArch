@@ -1,0 +1,7 @@
+---
+- name: Install chroot required python packages
+  pip:
+    name: "{{ item }}"
+  loop:
+    - pexpect #install -r requirements.txt ??
+ 

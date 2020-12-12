@@ -1,0 +1,9 @@
+---
+- name: Test
+  hosts: remote
+  vars_files:
+    - vars/user_vars.yml
+    - vars/passwords.yml
+  tasks:
+    - debug:
+        msg: "{{ user_password }}" # not required. The customized message that is printed. If omitted, prints a generic message.

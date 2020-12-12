@@ -1,6 +1,4 @@
 ---
-# run after pacstrap?
-# from https://github.com/sugarraysam/archsugar/blob/master/tasks/chroot/clock.yml
 - name: Set local timezone
   file:
     src: "/usr/share/zoneinfo/{{ timezone }}"
@@ -8,5 +6,4 @@
     state: link
 
 - name: Configure hardware clock
-  command:
-    cmd: hwclock --systohc
+  command: hwclock --systohc 

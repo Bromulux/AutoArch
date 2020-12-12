@@ -1,0 +1,6 @@
+---
+- name: Install Grub
+  command: grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub
+  
+- name: Generate Grub configuration
+  command: grub-mkconfig -o /boot/grub/grub.cfg
