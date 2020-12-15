@@ -22,7 +22,6 @@ bootstrap_pacman_pkgs:
   - networkmanager
   - nm-connection-editor
   - network-manager-applet
-#  - yay
   - arandr
   - thunderbird
   - terminator
@@ -32,4 +31,5 @@ bootstrap_pacman_pkgs:
   - vlc
   - sudo
   - openssh
+  - ansible
 

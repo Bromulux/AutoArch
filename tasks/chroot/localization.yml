@@ -17,5 +17,5 @@
 - name: Configure system languages
   lineinfile:
     path: /etc/locale.conf
-    line: "LANG=en_CA.UTF8"
+    line: "LANG=en_CA.UTF-8"
     create: true

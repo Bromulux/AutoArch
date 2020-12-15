@@ -1,0 +1,7 @@
+---
+- name: Start Network manager service
+  become: true
+  service:
+    name: NetworkManager
+    state: started
+    enabled: yes
