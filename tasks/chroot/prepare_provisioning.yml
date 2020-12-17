@@ -1,0 +1,9 @@
+---
+
+- name: Recursively change ownership of a directory
+  file:
+    path: /root/archauto
+    state: directory
+    recurse: yes
+    owner: "{{ user }}"
+    group: "{{ user }}"

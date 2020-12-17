@@ -5,8 +5,7 @@ clean up playbook (finding and deleting orphans (sugarraysam))
 blackarch
 color for pacman /etc/pacman.conf
 ssh config https://www.youtube.com/watch?v=-Q4T9wLsvOQ&t=744s
+fix locale? test with yay
 # optimize pre_installation
 # https://stackoverflow.com/questions/60893183/ansible-fails-with-modulenotfounderror-no-module-named-pexpect
-# uncomment instead of adding lines
-# add lines in hosts
-# test bootloader
+# put public (MIt license and reference too sugaraysam)
