@@ -9,3 +9,4 @@ fix locale? test with yay
 # optimize pre_installation
 # https://stackoverflow.com/questions/60893183/ansible-fails-with-modulenotfounderror-no-module-named-pexpect
 # put public (MIt license and reference too sugaraysam)
+prepare transfer to provisioning
