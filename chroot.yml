@@ -17,6 +17,7 @@
     - import_tasks: tasks/chroot/bootloader.yml
     - import_tasks: tasks/chroot/create_user.yml
     - import_tasks: tasks/chroot/sudo.yml
+    - import_tasks: tasks/chroot/prepare_provisioning.yml
 #important links:
 #https://docs.ansible.com/ansible/latest/collections/ansible/builtin/dict_lookup.html
 #https://stackoverflow.com/questions/57102717/how-to-gather-facts-about-disks-using-ansible
