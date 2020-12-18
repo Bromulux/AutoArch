@@ -1,4 +1,6 @@
 AutoArch is a way to automatically install Archlinux on a localhost.
+I was tired to reinstall Archlnux and worried to lose my config, so AutoArch was created.
+
 The process is done using Ansible.
 It was a way for me to learn about general automation.
 
