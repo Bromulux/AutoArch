@@ -1,0 +1,13 @@
+---
+- name: Configuring reflector
+  become: true
+  copy:
+    src: files/dotfiles/reflector.conf
+    dest: /etc/xdg/reflector/reflector.conf
+
+- name: Enabling reflector service
+  become: true
+  service:
+    name: reflector
+    state: started
+    enabled: yes

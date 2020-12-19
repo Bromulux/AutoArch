@@ -1,10 +1,10 @@
 ---
-- name: Clone a repo with separate git directory
+- name: Cloning AutoArch into new system
   git:
     repo: https://github.com/Bromulux/AutoArch.git
     dest: /home/{{ user }}/autoarch
 
-- name: Recursively change ownership of a directory
+- name: Chaning AutoArch ownership to {{ user }}
   file:
     path: /home/{{ user }}/autoarch
     state: directory

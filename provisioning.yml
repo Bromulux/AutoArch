@@ -8,5 +8,8 @@
   pre_tasks:
     - import_tasks: pre_tasks/chroot_python_requirements.yml
   tasks:
-    - import_tasks: tasks/provisioning/network_config.yml
-    - import_tasks: tasks/provisioning/aur_helper.yml
+    #- import_tasks: tasks/provisioning/network_config.yml
+    #- import_tasks: tasks/provisioning/mirrors.yml
+    #- import_tasks: tasks/provisioning/xorg.yml
+    #- import_tasks: tasks/provisioning/aur_helper.yml
+    - import_tasks: tasks/provisioning/install_aur_packages.yml

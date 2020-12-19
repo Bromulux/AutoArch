@@ -1,6 +1,6 @@
 ---
 - name: Archlinux bootstrap
-  hosts: workstation
+  hosts: local
   vars_files:
     - vars/partitions_vars.yml
     - vars/packages_vars.yml
@@ -11,6 +11,5 @@
   tasks:
     - import_tasks: tasks/bootstrap/partition.yml
     - import_tasks: tasks/bootstrap/filesystem.yml
-    - import_tasks: tasks/bootstrap/sorting_mirror_list.yml
     - import_tasks: tasks/bootstrap/pacstrap.yml
     - import_tasks: tasks/bootstrap/generate_fstab.yml

@@ -3,12 +3,12 @@
 - name: Cloning YAY
   git:
     repo: https://aur.archlinux.org/yay.git
-    dest: /home/{{ user }}/yay
+    dest: "/home/{{ user }}/yay"
   
-- name: Case insensitive password string match
+- name: Installing YAY #maybe a problem here?
   expect:
     command: makepkg -si
-    chdir: /home/{{ user }}/yay
+    chdir: "/home/{{ user }}/yay"
     responses:
       'sudo': "{{ user_password }}"
       'Y/n': "y"
@@ -18,3 +18,6 @@
     state: absent
     path: "/home/{{ user }}/yay"
     force: yes
+
+
+

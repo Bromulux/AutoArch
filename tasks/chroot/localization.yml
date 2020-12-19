@@ -5,8 +5,8 @@
     regexp: "{{ lang.regexp }}"
     replace: "{{ lang.replace }}"
   loop:
-    - { regexp: "#fr_CA.UTF8 UTF-8", replace: "fr_CA.UTF8 UTF-8" }
-    - { regexp: "#en_CA.UTF8 UTF-8", replace: "en_CA.UTF8 UTF-8" }
+    - { regexp: "#fr_CA.UTF-8 UTF-8", replace: "fr_CA.UTF-8 UTF-8" }
+    - { regexp: "#en_CA.UTF-8 UTF-8", replace: "en_CA.UTF-8 UTF-8" }
   loop_control:
     loop_var: lang
   

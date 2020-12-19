@@ -46,5 +46,8 @@ bootstrap_pacman_pkgs:
   - i3status
   - dmenu
   - flameshot #screenshot
+  - reflector
+  - jre-openjdk
+  - jdk-openjdk
   # pango, ttf-hack redshift
 
