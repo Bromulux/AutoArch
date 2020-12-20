@@ -5,4 +5,4 @@ partition_size:
   boot: 260
   swap: 2
   root: 20
-  home: 1
+  home: 20

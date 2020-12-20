@@ -5,13 +5,13 @@
     repo: https://aur.archlinux.org/yay.git
     dest: "/home/{{ user }}/yay"
   
-- name: Installing YAY #maybe a problem here?
+- name: Installing YAY
   expect:
-    command: makepkg -si
+    command: makepkg -si --noconfirm
     chdir: "/home/{{ user }}/yay"
     responses:
       'sudo': "{{ user_password }}"
-      'Y/n': "y"
+    timeout: null
 
 - name: Clean artifacts
   file:

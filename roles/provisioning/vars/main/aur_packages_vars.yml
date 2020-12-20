@@ -1,3 +1,4 @@
 ---
 aur_pkgs:
-  - brave
+  - brave-bin
+  - burpsuite

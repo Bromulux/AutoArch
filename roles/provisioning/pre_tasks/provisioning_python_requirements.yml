@@ -4,6 +4,3 @@
     name: "{{ item }}"
   loop:
     - pexpect #install -r requirements.txt ??
-
-- name: Installing ansible AUR helper module
-  command: ansible-galaxy install kewlfft.aur
