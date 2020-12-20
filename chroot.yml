@@ -2,28 +2,8 @@
 - name: Archlinux chroot
   hosts: chroot
   connection: chroot
-  vars_files:
-    - vars/partitions_vars.yml
-    - vars/user_vars.yml
-    - vars/passwords.yml
   pre_tasks:
-    - import_tasks: pre_tasks/chroot_python_requirements.yml
-  tasks:
-    - import_tasks: tasks/chroot/system_upgrade.yml
-    - import_tasks: tasks/chroot/time_zone.yml
-    - import_tasks: tasks/chroot/localization.yml
-    - import_tasks: tasks/chroot/host_files.yml
-    - import_tasks: tasks/chroot/update_root_password.yml
-    - import_tasks: tasks/chroot/bootloader.yml
-    - import_tasks: tasks/chroot/create_user.yml
-    - import_tasks: tasks/chroot/sudo.yml
-    - import_tasks: tasks/chroot/prepare_provisioning.yml
-#important links:
-#https://docs.ansible.com/ansible/latest/collections/ansible/builtin/dict_lookup.html
-#https://stackoverflow.com/questions/57102717/how-to-gather-facts-about-disks-using-ansible
-#https://stackoverflow.com/questions/48036051/ansible-using-ansible-facts-how-can-i-get-a-disk-device-based-on-the-storage-c
-# filtering json: community.general.json_query: https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#transforming-dictionaries-into-lists
-# filtering json: https://jmespath.org/tutorial.html#functions
-#https://github.com/ansible/ansible/issues/41316
-# chroot: https://coderwall.com/p/_lpf1g/run-a-playbook-chrooted-in-a-local-dir
-# chroot: https://docs.ansible.com/ansible/latest/collections/community/general/chroot_connection.html
+    - import_tasks: roles/chroot/pre_tasks/chroot_python_requirements.yml
+  roles:
+    - role: chroot
+

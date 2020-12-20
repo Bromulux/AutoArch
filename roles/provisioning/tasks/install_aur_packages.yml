@@ -1,8 +1,7 @@
 ---
 # Thanks to https://github.com/kewlfft/ansible-aur
 - name: Installing AUR packages
-  roles:
-    - kewlfft.aur
   aur:
     use: yay
-    name: aur_pkgs
+    name: "{{ item }}"
+  loop: "{{ aur_pkgs }}"

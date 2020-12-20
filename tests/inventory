@@ -1,2 +1,6 @@
-[workstations]
-192.168.2.133
+[workstation]
+localhost ansible_connection=local
+[chroot]
+/mnt ansible_chroot_exe=arch-chroot becomue_user=bromulux
+[local]
+localhost

@@ -1,3 +1,4 @@
+# https://stackoverflow.com/questions/58247421/ansible-2-8-roles-using-the-vars-main-directory#58247702 for some reason you can swap main.yml for main directory and put you var files in there?
 ---
 bootstrap_pacman_pkgs:
   - base

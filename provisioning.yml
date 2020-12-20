@@ -1,15 +1,7 @@
 ---
 - name: Archlinux provisioning
   hosts: local
-  vars_files:
-    - vars/partitions_vars.yml
-    - vars/user_vars.yml
-    - vars/passwords.yml
   pre_tasks:
-    - import_tasks: pre_tasks/chroot_python_requirements.yml
-  tasks:
-    #- import_tasks: tasks/provisioning/network_config.yml
-    #- import_tasks: tasks/provisioning/mirrors.yml
-    #- import_tasks: tasks/provisioning/xorg.yml
-    #- import_tasks: tasks/provisioning/aur_helper.yml
-    - import_tasks: tasks/provisioning/install_aur_packages.yml
+    - import_tasks: roles/provisioning/pre_tasks/provisioning_python_requirements.yml
+  roles:
+    - role: provisioning

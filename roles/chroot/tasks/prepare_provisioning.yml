@@ -4,7 +4,7 @@
     repo: https://github.com/Bromulux/AutoArch.git
     dest: /home/{{ user }}/autoarch
 
-- name: Chaning AutoArch ownership to {{ user }}
+- name: Changing AutoArch ownership to {{ user }}
   file:
     path: /home/{{ user }}/autoarch
     state: directory

@@ -1,0 +1,14 @@
+---
+#- name: Archlinux bootstrap
+#  hosts: local
+#  vars_files:
+#    - vars/partitions_vars.yml
+#    - vars/packages_vars.yml
+#  pre_tasks:
+#    - import_tasks: pre_tasks/update_sys_clock.yml
+#    - import_tasks: pre_tasks/update_pacman_db.yml
+#    - import_tasks: pre_tasks/bootstrap_python_requirements.yml
+- import_tasks: tasks/partition.yml
+- import_tasks: tasks/filesystem.yml
+- import_tasks: tasks/pacstrap.yml
+- import_tasks: tasks/generate_fstab.yml

@@ -16,3 +16,14 @@ idempotent
 yay install packages
 jre
 
+Notes:
+important links:
+https://docs.ansible.com/ansible/latest/collections/ansible/builtin/dict_lookup.html
+https://stackoverflow.com/questions/57102717/how-to-gather-facts-about-disks-using-ansible
+https://stackoverflow.com/questions/48036051/ansible-using-ansible-facts-how-can-i-get-a-disk-device-based-on-the-storage-c
+ filtering json: community.general.json_query: https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#transforming-dictionaries-into-lists
+ filtering json: https://jmespath.org/tutorial.html#functions
+https://github.com/ansible/ansible/issues/41316
+ chroot: https://coderwall.com/p/_lpf1g/run-a-playbook-chrooted-in-a-local-dir
+ chroot: https://docs.ansible.com/ansible/latest/collections/community/general/chroot_connection.html
+

@@ -1,6 +1,4 @@
 ---
-# vars file for archauto
-#password: magic
 disk: /dev/sda
 # EFI in MiB rest in GiB
 partition_size:
