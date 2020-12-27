@@ -3,18 +3,16 @@ uninstall python packges required by ansible during installation
 ansible cfg
 clean up playbook (finding and deleting orphans (sugarraysam))
 blackarch
-aur packages
 color for pacman /etc/pacman.conf
 ssh config https://www.youtube.com/watch?v=-Q4T9wLsvOQ&t=744s
 # optimize pre_installation
 # https://stackoverflow.com/questions/60893183/ansible-fails-with-modulenotfounderror-no-module-named-pexpect
 fonts
-python venv
+python venv (look for zsh plugin)
 terminator config
 zsh/oh-my-zsh config
 idempotent
-yay install packages
-jre
+i3 (https://github.com/ashinkarov/i3-extras)
 
 Notes:
 important links:
@@ -27,3 +25,25 @@ https://github.com/ansible/ansible/issues/41316
  chroot: https://coderwall.com/p/_lpf1g/run-a-playbook-chrooted-in-a-local-dir
  chroot: https://docs.ansible.com/ansible/latest/collections/community/general/chroot_connection.html
 
+
+potential oh-my-zsh plugins:
+autoenv (or something for python venv)
+colorize (with chroma or Pygments)
+zsh-history-substring-search
+
+https://jichu4n.com/posts/how-to-set-default-fonts-and-font-aliases-on-linux/
+#jonathan, agnoster, xiong-chiamiov-plus, rkj-repos
+
+note for terminator config: uncheck rewrap on resize to avoid zsh bug on resize
+
+explore fzf (https://www.youtube.com/watch?v=1a5NiMhqAR0), nnn and rofi
+
+test jq
+
+neofetch
+
+dotfiles management
+
+transparent background, greeter, background changer
+
+i3 gaps, zoom

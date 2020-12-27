@@ -17,11 +17,7 @@ bootstrap_pacman_pkgs:
   - man-pages
   - texinfo
   - zsh #https://github.com/agnoster/agnoster-zsh-theme theme dans .zshrc dans archconfig avec plugins!
-  #- zsh-autosuggestions # pacman -Ss zsh for more
-  #- zsh-completions
-  #- zsh-syntax-highlighting
-  #- zsh-theme-powerlevel10k
-  # - powerline ?
+  #- ttf-hack
   - vim
   - nano
   - code
@@ -34,6 +30,9 @@ bootstrap_pacman_pkgs:
   - rofi # theme et config dans archconfig or dmenu instead? https://www.youtube.com/watch?v=R9m723tAurA
   - htop
   - nnn
+  - fzf
+  - fd
+  - jq
   - vlc
   - sudo
   - openssh
@@ -44,11 +43,12 @@ bootstrap_pacman_pkgs:
   - i3-gaps
   - i3blocks
   - i3lock
-  - i3status
-  - dmenu
+  - i3status #maybe remove if using another status bar?
+  - dmenu #remove when rofi is setup
   - flameshot #screenshot
   - reflector
   - jre-openjdk
   - jdk-openjdk
-  # pango, ttf-hack redshift
+  - pango #will make font problem maybe? try # fc-cache if warning
+   # ttf-hack redshift, blacklight
 

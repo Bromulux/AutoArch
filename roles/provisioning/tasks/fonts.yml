@@ -1,0 +1,18 @@
+---
+# https://jichu4n.com/posts/how-to-set-default-fonts-and-font-aliases-on-linux/
+- name: Configuring fonts.conf (to test)
+  copy:
+    src: files/dotfiles/.config/fontconfig/fonts.conf
+    dest: "/home/{{ user }}/.config/fontconfig/fonts.conf"
+
+#https://forum.portswigger.net/thread/burp-text-is-kind-of-akward-using-i3wm-and-xorg-81a70759
+- name: Fix antialiasing in Java applications (to test)
+  become: true
+  lineinfile:
+    path: /etc/environment
+    line: "{{ item }}"
+  loop:
+    - '\#For TTF':
+    - 'JAVA_FONTS=/usr/share/fonts/TTF'
+    - '\#Antialiasing for java apps\:'
+    - _JAVA_OPTIONS=\'-Dawt.useSystemAAFontSettings=on\'

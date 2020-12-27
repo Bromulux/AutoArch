@@ -1,0 +1,11 @@
+#
+# This file is parsed by pam_env module
+#
+# Syntax: simple "KEY=VAL" pairs on separate lines
+#
+
+#For TTF:
+JAVA_FONTS=/usr/share/fonts/TTF
+
+#Antialiasing for java apps:
+_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'

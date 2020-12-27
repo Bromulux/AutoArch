@@ -1,1 +1,32 @@
 ---
+- name: Installing Oh-My-Zsh (to test)
+  command: $ sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
+
+- name: Configuring .zprofile (to test)
+  copy:
+    src: files/dotfiles/.zprofile
+    dest: "/home/{{ user }}/.zprofile"
+
+- name: Configuring Powerlevel10k (to test)
+  command: echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >> /home/{{ user }}/.zshrc
+  copy:
+    src: files/dotfiles/.p10k.zsh
+    dest: "/home/{{ user }}/.p10k.zsh"
+  
+- name: Cloning zsh-autosuggestions pluging (to test)
+  git:
+      repo: https://github.com/zsh-users/zsh-autosuggestions.git
+      dest: /home/{{ user }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+  copy:
+    src: files/dotfiles/.oh-my-zsh/custom/my-zsh-autosuggestions-config.zsh
+    dest: "/home/{{ user }}/.oh-my-zsh/custom/my-zsh-autosuggestions-config.zsh"
+
+- name: Cloning zsh-syntax-highlighting pluging (to test)
+  git:
+      repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+      dest: /home/{{ user }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+
+- name: Cloning zsh-completions
+  git:
+      repo: https://github.com/zsh-users/zsh-completions.git
+      dest: /home/{{ user }}/.oh-my-zsh/custom/plugins/zsh-completions
