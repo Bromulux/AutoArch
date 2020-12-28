@@ -1,0 +1,18 @@
+---
+- name: Configuring org.freedesktop.Notifications.service (to test)
+  become: true
+  lineinfile:
+      path: /usr/share/dbus-1/services/org.freedesktop.Notifications.service
+      create: yes 
+      state: present 
+      line: '{{ item }}' 
+  loop:
+    - '[D-BUS Service]'
+    - 'Name=org.freedesktop.Notifications'
+    - '/usr/bin/dunst -config .config/dunst/dunstrc'
+
+- name: Configuring Dunst (to test)
+  copy:
+    src: files/dotfiles/.config/dunst/dunstrc
+    dest: "/home/{{ user }}/.config/dunst/dunstrc"  
+

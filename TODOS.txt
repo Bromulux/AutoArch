@@ -7,10 +7,7 @@ color for pacman /etc/pacman.conf
 ssh config + zshrc to silent https://www.youtube.com/watch?v=-Q4T9wLsvOQ&t=744s
 # optimize pre_installation
 # https://stackoverflow.com/questions/60893183/ansible-fails-with-modulenotfounderror-no-module-named-pexpect
-fonts
 python venv (look for zsh plugin)
-terminator config
-zsh/oh-my-zsh config
 idempotent
 i3 (https://github.com/ashinkarov/i3-extras)
 
@@ -44,11 +41,6 @@ transparent background, greeter, background changer picom nitrogen variety, and 
 
 i3 gaps, zoom
 
-notification(problem with brave and reboot, dunst?)
-
 power management
 
 sound
-
-
-$ localectl --no-convert set-x11-keymap ca,us pc104 ,dvorak grp:alt_shift_toggle

@@ -50,5 +50,6 @@ bootstrap_pacman_pkgs:
   - jre-openjdk
   - jdk-openjdk
   - pango #will make font problem maybe? try # fc-cache if warning
+  - dunst
    # ttf-hack redshift, blacklight
 
