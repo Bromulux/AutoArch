@@ -4,7 +4,7 @@ ansible cfg
 clean up playbook (finding and deleting orphans (sugarraysam))
 blackarch
 color for pacman /etc/pacman.conf
-ssh config https://www.youtube.com/watch?v=-Q4T9wLsvOQ&t=744s
+ssh config + zshrc to silent https://www.youtube.com/watch?v=-Q4T9wLsvOQ&t=744s
 # optimize pre_installation
 # https://stackoverflow.com/questions/60893183/ansible-fails-with-modulenotfounderror-no-module-named-pexpect
 fonts
@@ -34,16 +34,21 @@ zsh-history-substring-search
 https://jichu4n.com/posts/how-to-set-default-fonts-and-font-aliases-on-linux/
 #jonathan, agnoster, xiong-chiamiov-plus, rkj-repos
 
-note for terminator config: uncheck rewrap on resize to avoid zsh bug on resize
-
-explore fzf (https://www.youtube.com/watch?v=1a5NiMhqAR0), nnn and rofi
+explore fzf (https://www.youtube.com/watch?v=1a5NiMhqAR0), nnn
 
 test jq
 
-neofetch
-
 dotfiles management
 
-transparent background, greeter, background changer
+transparent background, greeter, background changer picom nitrogen variety, and other UI utils
 
 i3 gaps, zoom
+
+notification(problem with brave and reboot, dunst?)
+
+power management
+
+sound
+
+
+$ localectl --no-convert set-x11-keymap ca,us pc104 ,dvorak grp:alt_shift_toggle

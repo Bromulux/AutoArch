@@ -1,0 +1,12 @@
+# https://wiki.archlinux.org/index.php/Xorg/Keyboard_configuration
+
+#example:
+# ca == default == qwerty and us==dvorak
+#localectl --no-convert set-x11-keymap ca,us pc104 ",dvorak" grp:alt_shift_toggle
+
+#qwerty for both
+---
+- name: Setup keyboard layout (to test)
+  become: true
+  command: localectl --no-convert set-x11-keymap ca,us pc104 "," grp:alt_shift_toggle
+  creates: /etc/X11/xorg.conf.d/00-keyboard.conf

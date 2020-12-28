@@ -8,3 +8,9 @@
   file:
     path: /home/{{ user }}/.config/terminator
     state: directory
+
+- name: Create Rofi config directory
+  file:
+    path: /home/{{ user }}/.config/rofi
+    state: directory
+

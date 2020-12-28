@@ -1,0 +1,5 @@
+---
+- name: Configuring Rofi
+  copy:
+    src: files/dotfiles/.config/rofi/config.rasi
+    dest: "/home/{{ user }}/.config/rofi/config.rasi"  

@@ -27,6 +27,7 @@ bootstrap_pacman_pkgs:
   - thunderbird
   - terminator
   - rofi # theme et config dans archconfig or dmenu instead? https://www.youtube.com/watch?v=R9m723tAurA
+  - neofetch
   - htop
   - nnn
   - fzf
