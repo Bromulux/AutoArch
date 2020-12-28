@@ -1,5 +1,5 @@
 ---
-#- name: Installing Oh-My-Zsh (to test)
+#- name: Installing Oh-My-Zsh 
 #  command: sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
 
 - name: Download Oh-My-Zsh
@@ -8,7 +8,7 @@
     dest: /home/{{ user }}/install.sh
 
 - name: Install Oh-My-Zsh
-  script: /home/{{ user }}/install.sh
+  script: /home/{{ user }}/install.sh --unattended
   args:
     creates: /home/{{ user }}/.oh-my-zsh
     
@@ -17,41 +17,37 @@
     path: /home/{{ user }}/install.sh
     state: absent
 
-#- name: Configuring .zprofile (to test)
-#  copy:
-#    src: files/dotfiles/.zprofile
-#    dest: "/home/{{ user }}/.zprofile"
-#
-#- name: Configuring .zshrc (to test) # do this after installing oh-my-zsh to not lose the .zshrc
-#  copy:
-#    src: files/dotfiles/.zshrc
-#    dest: "/home/{{ user }}/.zshrc"
-#
-##- name: Configuring Powerlevel10k (to test)
-##  command: echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >> /home/{{ user }}/.zshrc
-##  copy:
-##    src: files/dotfiles/.p10k.zsh
-##    dest: "/home/{{ user }}/.p10k.zsh"
-#
-#- name: Configuring Powerlevel10k
-#  lineinfile:
-#    path: /home/{{ user }}/.zshrc
-#    line: 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme'
-#  
-#- name: Cloning zsh-autosuggestions pluging (to test)
-#  git:
-#      repo: https://github.com/zsh-users/zsh-autosuggestions.git
-#      dest: /home/{{ user }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-#  copy:
-#    src: files/dotfiles/.oh-my-zsh/custom/my-zsh-autosuggestions-config.zsh
-#    dest: "/home/{{ user }}/.oh-my-zsh/custom/my-zsh-autosuggestions-config.zsh"
-#
-#- name: Cloning zsh-syntax-highlighting pluging (to test)
-#  git:
-#      repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
-#      dest: /home/{{ user }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-#
-#- name: Cloning zsh-completions
-#  git:
-#      repo: https://github.com/zsh-users/zsh-completions.git
-#      dest: /home/{{ user }}/.oh-my-zsh/custom/plugins/zsh-completions
+- name: Configuring .zprofile
+  copy:
+    src: files/dotfiles/.zprofile
+    dest: "/home/{{ user }}/.zprofile"
+
+- name: Configuring .zshrc 
+  copy:
+    src: files/dotfiles/.zshrc
+    dest: "/home/{{ user }}/.zshrc"
+
+- name: Configuring Powerlevel10k
+  copy:
+    src: files/dotfiles/.p10k.zsh
+    dest: "/home/{{ user }}/.p10k.zsh"
+    
+- name: Cloning zsh-autosuggestions pluging
+  git:
+      repo: https://github.com/zsh-users/zsh-autosuggestions.git
+      dest: /home/{{ user }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+- name: Configuring zsh-autosuggestions pluging     
+  copy:
+    src: files/dotfiles/.oh-my-zsh/custom/my-zsh-autosuggestions-config.zsh
+    dest: "/home/{{ user }}/.oh-my-zsh/custom/my-zsh-autosuggestions-config.zsh"
+
+- name: Cloning zsh-syntax-highlighting pluging
+  git:
+      repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+      dest: /home/{{ user }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+
+- name: Cloning zsh-completions
+  git:
+      repo: https://github.com/zsh-users/zsh-completions.git
+      dest: /home/{{ user }}/.oh-my-zsh/custom/plugins/zsh-completions

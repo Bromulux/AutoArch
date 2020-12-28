@@ -17,7 +17,6 @@ bootstrap_pacman_pkgs:
   - man-pages
   - texinfo
   - zsh #https://github.com/agnoster/agnoster-zsh-theme theme dans .zshrc dans archconfig avec plugins!
-  #- ttf-hack
   - vim
   - nano
   - code
@@ -26,7 +25,7 @@ bootstrap_pacman_pkgs:
   - network-manager-applet
   - arandr
   - thunderbird
-  - terminator #config et couleur pour terminator arch config!
+  - terminator
   - rofi # theme et config dans archconfig or dmenu instead? https://www.youtube.com/watch?v=R9m723tAurA
   - htop
   - nnn
