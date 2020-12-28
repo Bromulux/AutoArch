@@ -1,6 +1,10 @@
 ---
-- import_tasks: tasks/network_config.yml
-- import_tasks: tasks/mirrors.yml
-- import_tasks: tasks/xorg.yml
-- import_tasks: tasks/aur_helper.yml
-- import_tasks: tasks/install_aur_packages.yml
+#- import_tasks: tasks/directories.yml
+#- import_tasks: tasks/network_config.yml
+#- import_tasks: tasks/mirrors.yml
+#- import_tasks: tasks/xorg.yml
+#- import_tasks: tasks/aur_helper.yml
+#- import_tasks: tasks/install_aur_packages.yml
+#- import_tasks: tasks/fonts.yml
+#- import_tasks: tasks/terminator.yml
+- import_tasks: tasks/zsh.yml

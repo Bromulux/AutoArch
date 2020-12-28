@@ -1,5 +1,5 @@
 ---
-- name: Configuring Terminator (to test)
+- name: Configuring Terminator
   copy:
     src: files/dotfiles/.config/terminator/config
     dest: "/home/{{ user }}/.config/terminator/config"  

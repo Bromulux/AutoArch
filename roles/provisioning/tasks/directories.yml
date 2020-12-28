@@ -1,0 +1,10 @@
+---
+- name: Create Fontconfig directory
+  file:
+    path: /home/{{ user }}/.config/fontconfig
+    state: directory
+
+- name: Create Terminator config directory
+  file:
+    path: /home/{{ user }}/.config/terminator
+    state: directory
